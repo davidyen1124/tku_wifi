@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.devandroid.tkuautowifi"
+    android:installLocation="auto"
+    android:versionCode="19"
+    android:versionName="2.0.6" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" >
+    </uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+        <activity
+            android:name="Preferences"
+            android:theme="@style/Normal" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".IOErrorView" >
+        </activity>
+
+        <receiver android:name="com.devandroid.tkuautowifi.NetworkStateChanged" >
+            <intent-filter>
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.devandroid.tkuautowifi.LoginAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/login_appwidget_info" />
+        </receiver>
+
+        <service android:name="com.devandroid.tkuautowifi.WifiLogin" >
+        </service>
+        <service android:name="com.devandroid.tkuautowifi.WifiLogout" >
+        </service>
+
+        <activity
+            android:name="AppLoader"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/NoActionBar" >
+        </activity>
+        <activity
+            android:name="TutorialActivity"
+            android:theme="@style/Normal" >
+        </activity>
+    </application>
+
+</manifest>

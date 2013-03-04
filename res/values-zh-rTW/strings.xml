@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TKU Wi-Fi</string>
+    <string name="pref_login_now">登入</string>
+    <string name="pref_logout_now">登出</string>
+    <string name="pref_preferences">設定</string>
+    <string name="pref_username">帳號</string>
+    <string name="pref_username_summary">點選輸入學號</string>
+    <string name="pref_password">密碼</string>
+    <string name="pref_password_summary">點選%s密碼</string>
+    <string name="pref_enabled">自動登入</string>
+    <string name="pref_enabled_summary">當網路可用時自動登入</string>
+    <string name="pref_error_notify_title">錯誤</string>
+    <string name="pref_error_notify_summary">回報使用者發生錯誤的方式</string>
+    <string name="pref_error_notify_sound">聲音</string>
+    <string name="pref_error_notify_vibrate">震動</string>
+    <string name="pref_error_notify_lights">螢幕</string>
+    <string name="pref_error_notify_none">無</string>
+    <string name="pref_error_notify_deliminator">,\u0020</string> <!-- A non-encoded trailing space will be removed -->
+    <string name="pref_toast_notify_title">成功</string>
+    <string name="pref_toast_notify_success">成功</string>
+    <string name="pref_toast_notify_not_required">已登入</string>
+    <string name="pref_about">關於我們</string>
+    <string name="pref_version_summary">Version %s</string>
+    <string name="pref_website">更多 Apps</string>
+    <string name="pref_website_summary">更多由Dev.Android開發的App</string>
+    <string name="pref_author">意見反應</string>
+    <string name="pref_author_summary">Dev.Android</string>
+    <string name="wifi_disabled_to_login">Wi-Fi 啟動才能登入</string>
+    <string name="wifi_disabled_to_logout">Wi-Fi 啟動才能登出</string>
+    <string name="tap_to_modify_wifi_settings">點選更改 WiFi 設定</string>
+    <string name="no_login_required">已登入，不需登入</string>
+    <string name="login_successful">成功登入 TKU Wi-Fi</string>
+    <string name="click_here_to_logout">點選登出</string>
+    <string name="ticker_login_error">無法登入 TKU Wi-Fi</string>
+    <string name="notify_login_ongoing_title">TKU Wi-Fi</string>
+    <string name="notify_login_ongoing_text_determine_requirement">檢查是否需要登入…</string>
+    <string name="notify_login_ongoing_text_logging_in">登入中…</string>
+    <string name="notify_login_error_title">登入失敗</string>
+    <string name="notify_login_error_text">點選重試</string>
+    <string name="notify_login_error_invalid_credentials_text">Invalid username or password</string>
+    <string name="notify_login_repeat_error">已登入，無需再次登入！</string>
+    <string name="notify_logout_repeat_error">已登出，無需再次登出！</string>
+    <string name="notify_check_network">發生錯誤，請再試一次！</string>
+    <string name="notify_app_not_exist">程式不存在</string>
+    <string name="tap_to_change_app">點選更改程式</string>
+    <string name="logout_successfully">登出成功</string>
+    <string name="enter_id_password">請先輸入學號和密碼</string>
+    <string name="menu_select_app_launch_title">自動開啟程式</string>
+    <string name="app_loader_select">你選擇的是: %s</string>
+    <string name="select_an_app">選擇程式</string>
+    <string name="ok">確認</string>
+    <string name="notify_login_ongoing_text_loggout">登出中…</string>
+    <string name="choose_to_feedback">選擇程式傳送意見</string>
+    <string name="general">一般</string>
+    <string name="notification">通知</string>
+    <string name="automatics">自動</string>
+    <string name="personal">個人</string>
+    <string name="input">輸入</string>
+    <string name="edit">編輯</string>
+    <string name="please_wait">請稍後</string>
+    <string name="loading_apps">載入程式中…</string>
+    <string name="clear">清除</string>
+    <string name="login_timeout">登入逾時</string>
+    <string name="logout_timeout">登出逾時</string>
+    <string name="logging_out">登出中…</string>
+    <string name="id_password_not_valid">學號或密碼錯誤</string>
+    <string name="tap_to_modify_id_password">點選修改學號和密碼</string>
+    <string name="not_connected_to_tku">未連線至tku</string>
+    <string name="next">下一步</string>
+    <string name="lets_start">開始</string>
+    <string name="back">返回</string>
+    <string name="tutorial">教學</string>
+    <string name="auto_login_tutorial">\n\t\t當手機一接收到 tku 的訊號時，就會立即為您登入，無需按任何按鍵。\n\n\t\t此功能並不會常駐在手機，所以無需擔心耗電的問題。</string>
+    <string name="auto_launch_app_tutorial">\n\t\t當手機一完成登入時，就會自動打開設定好的程式。\n\n\t\t當您的同學還在輸入學號跟密碼時，您已經在用 Facebook 打卡了。</string>
+    <string name="select_auto_launch_app">選擇程式 %s</string>
+    <string name="auto_login">自動登入 %s</string>
+    <string name="enabled">開啟</string>
+    <string name="disabled">關閉</string>
+    <string name="logout_error">登出錯誤</string>
+    <string name="check_id_password">請檢查您的學號與密碼</string>
+    <string name="tap_go_play_store">點擊至Play商店</string>
+    <string name="update_app">請更新 TKU Wi-Fi</string>
+
+    <string-array name="tutorial_title">
+        <item>感謝您下載\n由 Dev.Android 所開發的 TKU Wi-Fi</item>
+        <item>請輸入您的學號</item>
+        <item>請輸入您的密碼</item>
+        <item>自動登入</item>
+        <item>自動開啟程式</item>
+        <item>把 Widget 放在您的桌面上吧！</item>
+    </string-array>
+
+</resources>

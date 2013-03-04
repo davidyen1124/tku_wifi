@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+         This is a theme that will adjust itself depending on the API version.
+         The default definition is the safe one, using a theme that has always
+         been defined.  Look at values-11/styles.xml for a variation that is
+         selected when the holographic theme is available.
+    -->
+    <style name="Dialog" parent="android:Theme.Dialog"></style>
+
+    <style name="NoActionBar" parent="android:Theme.Black.NoTitleBar.Fullscreen"></style>
+
+</resources>

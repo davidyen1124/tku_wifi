@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- For API level 11 or later, the Holo theme is available and we prefer that. -->
+    <style name="Normal" parent="android:Theme.Holo"></style>
+
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen"></style>
+
+</resources>

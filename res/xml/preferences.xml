@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/general" >
+        <Preference
+            android:key="login_now"
+            android:title="@string/pref_login_now" >
+        </Preference>
+        <Preference
+            android:key="logout_now"
+            android:title="@string/pref_logout_now" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/personal" >
+        <EditTextPreference
+            android:key="username"
+            android:singleLine="true"
+            android:summary="@string/pref_username_summary"
+            android:title="@string/pref_username" />
+        <EditTextPreference
+            android:key="password"
+            android:password="true"
+            android:singleLine="true"
+            android:summary="@string/pref_password_summary"
+            android:title="@string/pref_password" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/automatics" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="enabled"
+            android:summary="@string/pref_enabled_summary"
+            android:title="@string/pref_enabled" />
+
+        <Preference
+            android:key="select_app_launch"
+            android:title="@string/menu_select_app_launch_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/notification" >
+        <PreferenceScreen
+            android:key="toast_notify"
+            android:title="@string/pref_toast_notify_title" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="toast_notify_success"
+                android:title="@string/pref_toast_notify_success" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="toast_notify_not_required"
+                android:title="@string/pref_toast_notify_not_required" />
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:key="error_notify"
+            android:title="@string/pref_error_notify_title" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="error_notify_sound"
+                android:title="@string/pref_error_notify_sound" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="error_notify_vibrate"
+                android:title="@string/pref_error_notify_vibrate" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="error_notify_lights"
+                android:title="@string/pref_error_notify_lights" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_about" >
+        <Preference
+            android:key="version"
+            android:summary="@string/pref_version_summary"
+            android:title="@string/app_name" />
+        <Preference
+            android:key="website"
+            android:summary="@string/pref_website_summary"
+            android:title="@string/pref_website" />
+        <Preference
+            android:key="author"
+            android:summary="@string/pref_author_summary"
+            android:title="@string/pref_author" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

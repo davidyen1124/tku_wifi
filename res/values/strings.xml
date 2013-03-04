@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TKU Wi-Fi</string>
+    <string name="pref_login_now">Login</string>
+    <string name="pref_logout_now">Logout</string>
+    <string name="pref_preferences">Settings</string>
+    <string name="pref_username">Student ID</string>
+    <string name="pref_username_summary">Tap to input student ID</string>
+    <string name="pref_password">Password</string>
+    <string name="pref_password_summary">Tap to %s password</string>
+    <string name="pref_enabled">Auto Login</string>
+    <string name="pref_enabled_summary">Log in when wifi is available</string>
+    <string name="pref_error_notify_title">Error</string>
+    <string name="pref_error_notify_summary">Error</string>
+    <string name="pref_error_notify_sound">Sound</string>
+    <string name="pref_error_notify_vibrate">Vibration</string>
+    <string name="pref_error_notify_lights">Screen</string>
+    <string name="pref_error_notify_none">Nothing</string>
+    <string name="pref_error_notify_deliminator">,\u0020</string> <!-- A non-encoded trailing space will be removed -->
+    <string name="pref_toast_notify_title">Success</string>
+    <string name="pref_toast_notify_success">Success</string>
+    <string name="pref_toast_notify_not_required">Logged in</string>
+    <string name="pref_about">About us</string>
+    <string name="pref_version_summary">Version %s</string>
+    <string name="pref_website">More Apps</string>
+    <string name="pref_website_summary">More apps created by Dev.Android</string>
+    <string name="pref_author">Send feedback</string>
+    <string name="pref_author_summary">Dev.Android</string>
+    <string name="wifi_disabled_to_login">Turn on Wi-Fi before login</string>
+    <string name="wifi_disabled_to_logout">Turn on Wi-Fi before logout</string>
+    <string name="tap_to_modify_wifi_settings">Tap to modify WiFi setting</string>
+    <string name="no_login_required">You have logged in</string>
+    <string name="login_successful">Login to TKU successfully</string>
+    <string name="click_here_to_logout">Tap to logout</string>
+    <string name="ticker_login_error">Unable to login</string>
+    <string name="notify_login_ongoing_text_determine_requirement">Determine login requirement</string>
+    <string name="notify_login_ongoing_text_logging_in">Logging in…</string>
+    <string name="notify_login_error_title">Login fail</string>
+    <string name="notify_login_error_text">Tap to retry</string>
+    <string name="notify_login_error_invalid_credentials_text">Invalid username or password</string>
+    <string name="notify_login_repeat_error">You have logged in</string>
+    <string name="notify_logout_repeat_error">You have logged out</string>
+    <string name="notify_check_network">Error! Please try again</string>
+    <string name="notify_app_not_exist">App doesn\'t exist</string>
+    <string name="tap_to_change_app">Tap to change app</string>
+    <string name="logout_successfully">Logout successfully</string>
+    <string name="enter_id_password">Enter your STUDENT ID and PASSWORD</string>
+    <string name="menu_select_app_launch_title">Launch app when logged in</string>
+    <string name="app_loader_select">You select: %s</string>
+    <string name="select_an_app">Select an app</string>
+    <string name="ok">OK</string>
+    <string name="notify_login_ongoing_text_loggout">Logging out…</string>
+    <string name="choose_to_feedback">Choose an app to send feedback</string>
+    <string name="general">General</string>
+    <string name="notification">Notification</string>
+    <string name="automatics">Automatics</string>
+    <string name="personal">Personal</string>
+    <string name="input">input</string>
+    <string name="edit">edit</string>
+    <string name="please_wait">Please wait</string>
+    <string name="loading_apps">Loading apps…</string>
+    <string name="clear">Clear</string>
+    <string name="login_timeout">Login timeout</string>
+    <string name="logout_timeout">Logout timeout</string>
+    <string name="logging_out">Logging out…</string>
+    <string name="id_password_not_valid">ID or password isn\'t valid</string>
+    <string name="tap_to_modify_id_password">Tap to modify ID and password</string>
+    <string name="not_connected_to_tku">Not connected to tku</string>
+    <string name="next">Next</string>
+    <string name="lets_start">Start</string>
+    <string name="back">Back</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="auto_login_tutorial">\n\t\tAs soon as your phone is connected, it will help you login without clicking any buttons.\n\n\t\tThis feature won\'t running in the background, so don\'t worry about the comsumption of the battery.</string>
+    <string name="auto_launch_app_tutorial">\n\t\tAfter your phone is logged in, it will open the app that you had choosed.\n\n\t\tWhen your classmates are typing ID and password, you are finishing checking in by Facebook.</string>
+    <string name="select_auto_launch_app">Select app %s</string>
+    <string name="auto_login">Auto login %s</string>
+    <string name="enabled">enabled</string>
+    <string name="disabled">disabled</string>
+    <string name="logout_error">Logout error</string>
+    <string name="check_id_password">Check your ID and password</string>
+    <string name="tap_go_play_store">Tap to go to Play Store</string>
+    <string name="update_app">Please update TKU Wi-Fi</string>
+
+    <string-array name="tutorial_title">
+        <item>Thanks for downloading TKU Wi-Fi by Dev.Android</item>
+        <item>Please enter your ID</item>
+        <item>Please enter your password</item>
+        <item>Auto login</item>
+        <item>Auto launch app</item>
+        <item>Put a widget on your home screen!</item>
+    </string-array>
+
+</resources>
