@@ -93,9 +93,9 @@ public class Utils {
 		try {
 			WifiManager wifi = (WifiManager) context
 					.getSystemService(Context.WIFI_SERVICE);
-			WifiInfo info = wifi.getConnectionInfo();
+			WifiInfo info = wifi.getConnectionInfo();	
 			if (wifi != null && info != null && info.getSSID() != null
-					&& wifi.isWifiEnabled() && info.getSSID().equals(ssid)) {
+					&& wifi.isWifiEnabled() && info.getSSID().replaceAll("\"","").equals(ssid)) {
 				isConnect = true;
 			}
 		} catch (NullPointerException e) {
