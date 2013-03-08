@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.devandroid.tkuautowifi"
     android:installLocation="auto"
-    android:versionCode="19"
-    android:versionName="2.0.6" >
+    android:versionCode="22"
+    android:versionName="2.0.8" >
 
     <uses-sdk
         android:minSdkVersion="7"
