@@ -3,8 +3,6 @@ package com.devandroid.tkuautowifi;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
-import org.apache.http.conn.ConnectTimeoutException;
-
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -91,46 +89,34 @@ public class WifiLogin extends IntentService {
 				Preferences.KEY_PASSWORD, ""), this);
 
 		try {
-			try {
-				PendingIntent contentIntent = PendingIntent.getActivity(this,
-						0, new Intent(), 0);
-				createNotification(
-						Constant.NOTIFICATION_ONGOING_ID,
-						contentIntent,
-						getString(R.string.notify_login_ongoing_text_logging_in),
-						getString(R.string.app_name),
-						getString(R.string.notify_login_ongoing_text_logging_in),
-						true);
+			PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+					new Intent(), 0);
+			createNotification(Constant.NOTIFICATION_ONGOING_ID, contentIntent,
+					getString(R.string.notify_login_ongoing_text_logging_in),
+					getString(R.string.app_name),
+					getString(R.string.notify_login_ongoing_text_logging_in),
+					true);
 
-				loginClient.login();
+			loginClient.login();
 
-				if (pref.getBoolean(Preferences.KEY_TOAST_NOTIFY_SUCCESS, true)) {
-					createToastNotification(
-							getString(R.string.login_successful),
-							Toast.LENGTH_SHORT);
-				}
-
-				createLoginSuccessNotification();
-				createChangelogNotification(loginClient.getChangelog());
-				launchApp();
-			} catch (LoginRepeatException e) {
-				createLoginSuccessNotification();
-				createToastNotification(
-						getString(R.string.notify_login_repeat_error),
+			if (pref.getBoolean(Preferences.KEY_TOAST_NOTIFY_SUCCESS, true)) {
+				createToastNotification(getString(R.string.login_successful),
 						Toast.LENGTH_SHORT);
-				createChangelogNotification(loginClient.getChangelog());
-				launchApp();
 			}
+
+			createLoginSuccessNotification();
+			createChangelogNotification(loginClient.getChangelog());
+			launchApp();
 		} catch (SocketTimeoutException e) {
 			Log.v(TAG, "Login failed: SocketTimeoutException");
 			Log.v(TAG, Utils.stackTraceToString(e));
 
 			createTimeoutRetryNotification();
-		} catch (ConnectTimeoutException e) {
-			Log.v(TAG, "Login failed: ConnectTimeoutException");
-			Log.v(TAG, Utils.stackTraceToString(e));
-
-			createTimeoutRetryNotification();
+			// } catch (ConnectTimeoutException e) {
+			// Log.v(TAG, "Login failed: ConnectTimeoutException");
+			// Log.v(TAG, Utils.stackTraceToString(e));
+			//
+			// createTimeoutRetryNotification();
 		} catch (LoginException e) {
 			Log.v(TAG, "Login failed: LoginException");
 			Log.v(TAG, Utils.stackTraceToString(e));

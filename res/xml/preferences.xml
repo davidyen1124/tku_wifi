@@ -9,6 +9,9 @@
         <Preference
             android:key="logout_now"
             android:title="@string/pref_logout_now" />
+        <Preference
+            android:key="connection_detail"
+            android:title="@string/connection_detail" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/personal" >
         <EditTextPreference

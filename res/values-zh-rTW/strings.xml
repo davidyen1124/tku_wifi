@@ -82,6 +82,7 @@
     <string name="check_id_password">請檢查您的學號與密碼</string>
     <string name="tap_go_play_store">點擊至Play商店</string>
     <string name="update_app">請更新 TKU Wi-Fi</string>
+    <string name="connection_detail">連線詳細資料</string>
 
     <string-array name="tutorial_title">
         <item>感謝您下載\n由 Dev.Android 所開發的 TKU Wi-Fi</item>

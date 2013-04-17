@@ -39,6 +39,7 @@ public class Preferences extends PreferenceActivity implements
 	public static final String KEY_AUTHOR = "author";
 	public static final String KEY_FIRST_TIME_OPEN = "first_time_open";
 	public static final String KEY_START_TUTORIAL = "start_tutorial";
+	public static final String KEY_CONNECTION_DETAIL = "connection_detail";
 
 	public static final String BUNDLE_SHOW_CLEAR_ITEM = "show_clear_item";
 
@@ -46,15 +47,16 @@ public class Preferences extends PreferenceActivity implements
 	public static final String KEY_CLASS_NAME = "PREF_CLASS_NAME";
 	public static final String KEY_APP_NAME = "PREF_APP_NAME";
 
-	private String EMAIL_TYPE = "message/rfc822";
-	private String EMAIL_AUTHOR = "devandroidteam@gmail.com";
-	private String EMAIL_SUBJECT = "[TKU Wi-Fi]";
-	private String WEBSITE_URL = "https://play.google.com/store/apps/developer?id=Dev.Android";
+	private final String EMAIL_TYPE = "message/rfc822";
+	private final String EMAIL_AUTHOR = "devandroidteam@gmail.com";
+	private final String EMAIL_SUBJECT = "[TKU Wi-Fi]";
+	private final String WEBSITE_URL = "https://play.google.com/store/apps/developer?id=Dev.Android";
+	private final String URL_DETAIL = "http://163.13.8.254/login_online_detail.php";
 
 	private SharedPreferences prefs;
 
-	private Preference pref_login, pref_logout, pref_select_app, pref_version,
-			pref_website, pref_author;
+	private Preference pref_login, pref_logout, pref_connection_detail,
+			pref_select_app, pref_version, pref_website, pref_author;
 	private EditTextPreference field_username, field_password;
 	private PreferenceScreen pref_success, pref_error;
 
@@ -75,6 +77,7 @@ public class Preferences extends PreferenceActivity implements
 
 		pref_login = (Preference) findPreference(KEY_LOGIN_NOW);
 		pref_logout = (Preference) findPreference(KEY_LOGOUT_NOW);
+		pref_connection_detail = (Preference) findPreference(KEY_CONNECTION_DETAIL);
 		pref_select_app = (Preference) findPreference(KEY_SELECT_APP);
 		pref_version = (Preference) findPreference(KEY_VERSION);
 		pref_website = (Preference) findPreference(KEY_WEBSITE);
@@ -88,6 +91,7 @@ public class Preferences extends PreferenceActivity implements
 	private void setListeners() {
 		pref_login.setOnPreferenceClickListener(this);
 		pref_logout.setOnPreferenceClickListener(this);
+		pref_connection_detail.setOnPreferenceClickListener(this);
 		pref_select_app.setOnPreferenceClickListener(this);
 		pref_version.setOnPreferenceClickListener(this);
 		pref_website.setOnPreferenceClickListener(this);
@@ -322,6 +326,8 @@ public class Preferences extends PreferenceActivity implements
 			login();
 		} else if (preference == pref_logout) {
 			logout();
+		} else if (preference == pref_connection_detail) {
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URL_DETAIL)));
 		} else if (preference == pref_select_app) {
 			openSelectAppDialog();
 		} else if (preference == pref_website) {

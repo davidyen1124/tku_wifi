@@ -81,6 +81,7 @@
     <string name="check_id_password">Check your ID and password</string>
     <string name="tap_go_play_store">Tap to go to Play Store</string>
     <string name="update_app">Please update TKU Wi-Fi</string>
+    <string name="connection_detail">Connection detail</string>
 
     <string-array name="tutorial_title">
         <item>Thanks for downloading TKU Wi-Fi by Dev.Android</item>
