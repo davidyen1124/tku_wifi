@@ -53,8 +53,7 @@ public class WifiClient {
 		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
 
 		mHttpClient = new DefaultHttpClient(params);
-
-		// mHttpClient.setParams(params);
+		mHttpClient.setParams(params);
 
 		// mHttpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler()
 		// {
