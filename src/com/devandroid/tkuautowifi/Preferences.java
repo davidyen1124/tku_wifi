@@ -48,9 +48,9 @@ public class Preferences extends PreferenceActivity implements
 	public static final String KEY_APP_NAME = "PREF_APP_NAME";
 
 	private final String EMAIL_TYPE = "message/rfc822";
-	private final String EMAIL_AUTHOR = "devandroidteam@gmail.com";
+	private final String EMAIL_AUTHOR = "sparkslab.tw@gmail.com";
 	private final String EMAIL_SUBJECT = "[TKU Wi-Fi]";
-	private final String WEBSITE_URL = "https://play.google.com/store/apps/developer?id=Dev.Android";
+	private final String WEBSITE_URL = "https://play.google.com/store/apps/developer?id=Sparks+Lab";
 	private final String URL_DETAIL = "http://163.13.8.254/login_online_detail.php";
 
 	private SharedPreferences prefs;

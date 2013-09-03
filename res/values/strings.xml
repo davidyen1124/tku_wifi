@@ -24,9 +24,9 @@
     <string name="pref_about">About us</string>
     <string name="pref_version_summary">Version %s</string>
     <string name="pref_website">More Apps</string>
-    <string name="pref_website_summary">More apps created by Dev.Android</string>
+    <string name="pref_website_summary">More apps created by Sparks Lab</string>
     <string name="pref_author">Send feedback</string>
-    <string name="pref_author_summary">Dev.Android</string>
+    <string name="pref_author_summary">Sparks Lab</string>
     <string name="wifi_disabled_to_login">Turn on Wi-Fi before login</string>
     <string name="wifi_disabled_to_logout">Turn on Wi-Fi before logout</string>
     <string name="tap_to_modify_wifi_settings">Tap to modify WiFi setting</string>
@@ -84,7 +84,7 @@
     <string name="connection_detail">Connection detail</string>
 
     <string-array name="tutorial_title">
-        <item>Thanks for downloading TKU Wi-Fi by Dev.Android</item>
+        <item>Thanks for downloading TKU Wi-Fi by Sparks Lab</item>
         <item>Please enter your ID</item>
         <item>Please enter your password</item>
         <item>Auto login</item>
