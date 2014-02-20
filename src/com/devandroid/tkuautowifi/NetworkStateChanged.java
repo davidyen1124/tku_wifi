@@ -18,6 +18,7 @@
 
 package com.devandroid.tkuautowifi;
 
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,8 +28,6 @@ import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 
 public class NetworkStateChanged extends BroadcastReceiver {
-	static final String TAG = "TKUWIFILOGIN";
-	static final String SSID = "tku";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -53,23 +52,23 @@ public class NetworkStateChanged extends BroadcastReceiver {
 			return;
 		}
 
+		WifiManager wifiManager = (WifiManager) context
+				.getSystemService(Service.WIFI_SERVICE);
+
 		try {
-			if ((WifiManager) context.getSystemService(Context.WIFI_SERVICE) == null
-					|| ((WifiManager) context
-							.getSystemService(Context.WIFI_SERVICE))
-							.getConnectionInfo() == null) {
+			// check manager provide enough information
+			if (wifiManager == null || wifiManager.getConnectionInfo() == null) {
 				return;
 			}
-			if (((WifiManager) context.getSystemService(Context.WIFI_SERVICE))
-					.getConnectionInfo().getSSID() != null) {
-				if (!((WifiManager) context
-						.getSystemService(Context.WIFI_SERVICE))
-						.getConnectionInfo().getSSID().equals(SSID)) {
-					return;
-				} else {
-					Intent i = new Intent(context, WifiLogin.class);
-					context.startService(i);
-				}
+
+			// after Android 4.3, the ssid becomes "ssid", so we need to remove
+			// "
+			String ssid = wifiManager.getConnectionInfo().getSSID();
+			if (ssid != null && ssid.replace("\"", "").equals(Constant.SSID)) {
+				Intent i = new Intent(context, WifiLoginService.class);
+				context.startService(i);
+			} else {
+				return;
 			}
 		} catch (NullPointerException e) {
 			return;

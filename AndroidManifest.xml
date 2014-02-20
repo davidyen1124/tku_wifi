@@ -7,16 +7,12 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="19" />
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.VIBRATE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -30,8 +26,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".IOErrorView" >
         </activity>
 
         <receiver android:name="com.devandroid.tkuautowifi.NetworkStateChanged" >
@@ -49,20 +43,16 @@
                 android:resource="@xml/login_appwidget_info" />
         </receiver>
 
-        <service android:name="com.devandroid.tkuautowifi.WifiLogin" >
-        </service>
-        <service android:name="com.devandroid.tkuautowifi.WifiLogout" >
-        </service>
+        <service android:name="com.devandroid.tkuautowifi.WifiLoginService" />
+        <service android:name="com.devandroid.tkuautowifi.WifiLogoutService" />
 
         <activity
             android:name="AppLoader"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/NoActionBar" >
-        </activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name="TutorialActivity"
-            android:theme="@style/Normal" >
-        </activity>
+            android:theme="@style/Normal" />
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ package com.devandroid.tkuautowifi;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -29,9 +30,13 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class Utils {
 
@@ -179,5 +184,34 @@ public class Utils {
 	public static boolean isScreenPortrait(Context context) {
 		return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? true
 				: false;
+	}
+
+	public static void openSoftkeyboard(Context context, EditText mEditText) {
+		((InputMethodManager) context
+				.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(
+				mEditText, InputMethodManager.SHOW_FORCED);
+	}
+
+	public static void closeSoftkeyboard(Activity activity) {
+		activity.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+	}
+
+	public static void closeSoftkeyboard(Context context, EditText mEditText) {
+		((InputMethodManager) context
+				.getSystemService(Context.INPUT_METHOD_SERVICE))
+				.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+	}
+
+	public static void createToastNotification(final Context context,
+			Handler handler, final String message, final int toastLength) {
+		if (message.length() > 0) {
+			handler.post(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(context, message, toastLength).show();
+				}
+			});
+		}
 	}
 }

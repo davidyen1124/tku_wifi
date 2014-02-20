@@ -22,11 +22,11 @@
     <string name="pref_toast_notify_success">Success</string>
     <string name="pref_toast_notify_not_required">Logged in</string>
     <string name="pref_about">About us</string>
-    <string name="pref_version_summary">Version %s</string>
-    <string name="pref_website">More Apps</string>
-    <string name="pref_website_summary">More apps created by Sparks Lab</string>
-    <string name="pref_author">Send feedback</string>
-    <string name="pref_author_summary">Sparks Lab</string>
+    <string name="version">Version %s</string>
+    <string name="more_apps">More Apps</string>
+    <string name="more_app_created_by_sparkslab">More apps created by Sparks Lab</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="sparkslab">Sparks Lab</string>
     <string name="wifi_disabled_to_login">Turn on Wi-Fi before login</string>
     <string name="wifi_disabled_to_logout">Turn on Wi-Fi before logout</string>
     <string name="tap_to_modify_wifi_settings">Tap to modify WiFi setting</string>
@@ -82,6 +82,9 @@
     <string name="tap_go_play_store">Tap to go to Play Store</string>
     <string name="update_app">Please update TKU Wi-Fi</string>
     <string name="connection_detail">Connection detail</string>
+    <string name="send">Send</string>
+    <string name="input_feedback">Input feedback</string>
+    <string name="login_error">Login error</string>
 
     <string-array name="tutorial_title">
         <item>Thanks for downloading TKU Wi-Fi by Sparks Lab</item>

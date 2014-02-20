@@ -34,7 +34,14 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.TypedValue;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class Preferences extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener, OnPreferenceClickListener {
@@ -182,41 +189,42 @@ public class Preferences extends PreferenceActivity implements
 	}
 
 	private void openSelectAppDialog() {
-		new AlertDialog.Builder(this)
-				.setTitle(
-						getString(R.string.menu_select_app_launch_title)
-								.toString())
-				.setMessage(
-						String.format(getString(R.string.app_loader_select),
-								prefs.getString(KEY_APP_NAME, "")))
-				.setPositiveButton(getString(R.string.ok).toString(), null)
-				.setNegativeButton(
-						getString(R.string.select_an_app).toString(),
-						new DialogInterface.OnClickListener() {
+		boolean hadChoosedApp = Memory.getString(this, KEY_APP_NAME, "")
+				.length() > 0;
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								startActivity(new Intent(Preferences.this,
-										AppLoader.class));
-							}
-						})
-				.setNeutralButton(getString(R.string.clear),
-						new DialogInterface.OnClickListener() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(getString(R.string.menu_select_app_launch_title));
+		builder.setMessage(hadChoosedApp ? String.format(
+				getString(R.string.app_loader_select),
+				prefs.getString(KEY_APP_NAME, ""))
+				: getString(R.string.select_an_app));
+		builder.setNegativeButton(getString(R.string.select_an_app),
+				new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								SharedPreferences.Editor editor = prefs.edit();
-								editor.putString(Preferences.KEY_PACKAGE_NAME,
-										"");
-								editor.putString(Preferences.KEY_CLASS_NAME, "");
-								editor.putString(Preferences.KEY_APP_NAME, "");
-								editor.commit();
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						startActivity(new Intent(Preferences.this,
+								AppLoader.class));
+					}
+				});
+		if (hadChoosedApp) {
+			builder.setNeutralButton(getString(R.string.clear),
+					new DialogInterface.OnClickListener() {
 
-								updateAppLaunchSummary();
-							}
-						}).show();
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Memory.setString(Preferences.this,
+									KEY_PACKAGE_NAME, "");
+							Memory.setString(Preferences.this, KEY_CLASS_NAME,
+									"");
+							Memory.setString(Preferences.this, KEY_APP_NAME, "");
+
+							updateAppLaunchSummary();
+						}
+					});
+		}
+		builder.setPositiveButton(getString(R.string.ok), null);
+		builder.show();
 	}
 
 	private void updateEnabled() {
@@ -288,8 +296,7 @@ public class Preferences extends PreferenceActivity implements
 	}
 
 	private void updateVersionSummary() {
-		String versionSummary = String.format(
-				getString(R.string.pref_version_summary),
+		String versionSummary = String.format(getString(R.string.version),
 				Utils.getVersionName(this));
 		pref_version.setSummary(versionSummary);
 	}
@@ -307,12 +314,15 @@ public class Preferences extends PreferenceActivity implements
 	}
 
 	private void login() {
-		Intent i = new Intent(Preferences.this, WifiLogin.class);
-		startService(i);
+		// Intent i = new Intent(Preferences.this, WifiLogin.class);
+		// startService(i);
+
+		Intent intent = new Intent(this, WifiLoginService.class);
+		startService(intent);
 	}
 
 	private void logout() {
-		Intent i = new Intent(Preferences.this, WifiLogout.class);
+		Intent i = new Intent(Preferences.this, WifiLogoutService.class);
 		startService(i);
 	}
 
@@ -328,14 +338,73 @@ public class Preferences extends PreferenceActivity implements
 	}
 
 	private void sendFeedback() {
-		Intent i = new Intent(Intent.ACTION_SEND);
-		i.setType(EMAIL_TYPE);
-		i.putExtra(Intent.EXTRA_EMAIL, new String[] { EMAIL_AUTHOR });
-		i.putExtra(Intent.EXTRA_SUBJECT, EMAIL_SUBJECT);
-		i.putExtra(Intent.EXTRA_TEXT, Utils.getDebugInfo(this));
+		final EditText editText = new EditText(this);
+		editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+		editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources()
+				.getDimension(R.dimen.textsize_medium));
+		editText.setHint(R.string.input_feedback);
 
-		startActivity(Intent.createChooser(i,
-				getString(R.string.choose_to_feedback)));
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+				.setIcon(android.R.drawable.ic_menu_send)
+				.setView(editText)
+				.setTitle(R.string.send_feedback)
+				.setPositiveButton(R.string.send,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Utils.closeSoftkeyboard(Preferences.this,
+										editText);
+
+								Intent i = new Intent(Intent.ACTION_SEND);
+								i.setType(EMAIL_TYPE);
+								i.putExtra(Intent.EXTRA_EMAIL,
+										new String[] { EMAIL_AUTHOR });
+								i.putExtra(Intent.EXTRA_SUBJECT, EMAIL_SUBJECT);
+								i.putExtra(
+										Intent.EXTRA_TEXT,
+										editText.getText().toString()
+												+ "\n\n"
+												+ Utils.getDebugInfo(Preferences.this));
+
+								startActivity(Intent.createChooser(i,
+										getString(R.string.choose_to_feedback)));
+							}
+						}).create();
+
+		// workaround for keyboard not opening when AlertDialog has an
+		// edittext inside
+		alertDialog.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		alertDialog.show();
+
+		final Button positiveButton = alertDialog
+				.getButton(AlertDialog.BUTTON_POSITIVE);
+		if (positiveButton != null) {
+			positiveButton.setEnabled(false);
+		}
+
+		editText.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+
+				if (positiveButton != null) {
+					positiveButton.setEnabled(s.length() > 0);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
 	}
 
 	@Override

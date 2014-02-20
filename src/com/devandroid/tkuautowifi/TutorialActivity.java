@@ -100,22 +100,22 @@ public class TutorialActivity extends Activity implements OnClickListener,
 		field_input.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		field_input.setOnEditorActionListener(this);
 		field_input.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources()
-				.getDimension(R.dimen.tutorial_content));
+				.getDimension(R.dimen.textsize_medium));
 
 		center_horizontal_layoutparams = new LinearLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		center_horizontal_layoutparams.gravity = Gravity.CENTER_HORIZONTAL;
 
 		view_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources()
-				.getDimension(R.dimen.tutorial_title));
+				.getDimension(R.dimen.textsize_large));
 
 		view_content = new TextView(this);
 		view_content.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources()
-				.getDimension(R.dimen.tutorial_content));
+				.getDimension(R.dimen.textsize_big));
 
 		checkbox = new CheckBox(this);
 		checkbox.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources()
-				.getDimension(R.dimen.tutorial_content));
+				.getDimension(R.dimen.textsize_medium));
 		checkbox.setOnCheckedChangeListener(this);
 		checkbox.setLayoutParams(center_horizontal_layoutparams);
 		if (pref.getBoolean(Preferences.KEY_ENABLED, true)) {
@@ -139,7 +139,7 @@ public class TutorialActivity extends Activity implements OnClickListener,
 					": " + pref.getString(Preferences.KEY_APP_NAME, "")));
 		}
 		btn_select_auto_launch_app.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-				getResources().getDimension(R.dimen.tutorial_content));
+				getResources().getDimension(R.dimen.textsize_medium));
 		btn_select_auto_launch_app
 				.setLayoutParams(center_horizontal_layoutparams);
 

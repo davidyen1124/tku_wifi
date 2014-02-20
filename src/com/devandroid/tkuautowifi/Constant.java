@@ -19,6 +19,9 @@
 package com.devandroid.tkuautowifi;
 
 public class Constant {
+	public static final String TAG = "SparksLab";
+
+	public static final String SSID = "tku";
 
 	public static final int NOTIFICATION_ERROR_ID = 1;
 	public static final int NOTIFICATION_ONGOING_ID = 2;

@@ -11,7 +11,7 @@
         android:gravity="center_horizontal"
         android:padding="5sp"
         android:text="TextView"
-        android:textSize="@dimen/tutorial_title"
+        android:textSize="@dimen/textsize_large"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/back"
-            android:textSize="@dimen/tutorial_button" />
+            android:textSize="@dimen/textsize_medium" />
 
         <Button
             android:id="@+id/btn_next"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/next"
-            android:textSize="@dimen/tutorial_button" />
+            android:textSize="@dimen/textsize_medium" />
     </LinearLayout>
 
     <LinearLayout

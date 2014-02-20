@@ -25,13 +25,11 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,34 +53,31 @@ public class AppLoader extends Activity implements OnItemClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		initialValues();
 		findViews();
 		setListeners();
-		getBundle();
 
 		new LoadingPackage().execute();
+	}
+
+	private void initialValues() {
+		show_clear_item = !Memory.getString(getApplicationContext(),
+				Preferences.KEY_APP_NAME, "").equals("");
+
+		list_appinfo = new ArrayList<AppLoader.AppInfo>();
+		pm = getPackageManager();
 	}
 
 	private void findViews() {
 		listview = new ListView(this);
 		setContentView(listview);
 
-		list_appinfo = new ArrayList<AppInfo>();
-
 		adapter = new MyAdapter();
 		listview.setAdapter(adapter);
-
-		pm = getPackageManager();
 	}
 
 	private void setListeners() {
 		listview.setOnItemClickListener(this);
-	}
-
-	private void getBundle() {
-		SharedPreferences pref = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		show_clear_item = !pref.getString(Preferences.KEY_APP_NAME, "").equals(
-				"");
 	}
 
 	class AppInfo {
@@ -107,9 +102,10 @@ public class AppLoader extends Activity implements OnItemClickListener {
 			Collections.sort(resolveInfoList,
 					new ResolveInfo.DisplayNameComparator(pm));
 
-			AppInfo item = new AppInfo();
+			AppInfo item = null;
 
 			if (show_clear_item) {
+				item = new AppInfo();
 				item.packageName = "";
 				item.className = "";
 				item.icon = getResources().getDrawable(
@@ -120,12 +116,10 @@ public class AppLoader extends Activity implements OnItemClickListener {
 
 			for (ResolveInfo resolveInfo : resolveInfoList) {
 				item = new AppInfo();
-
 				item.packageName = resolveInfo.activityInfo.packageName;
 				item.className = resolveInfo.activityInfo.name;
 				item.icon = resolveInfo.loadIcon(pm);
 				item.label = (String) resolveInfo.loadLabel(pm);
-
 				list_appinfo.add(item);
 			}
 
@@ -148,7 +142,6 @@ public class AppLoader extends Activity implements OnItemClickListener {
 					getString(R.string.please_wait),
 					getString(R.string.loading_apps));
 		}
-
 	}
 
 	@Override
@@ -158,22 +151,18 @@ public class AppLoader extends Activity implements OnItemClickListener {
 			AppInfo appInfo = new AppInfo();
 			appInfo = list_appinfo.get(position);
 
-			SharedPreferences prefs = PreferenceManager
-					.getDefaultSharedPreferences(this);
-			SharedPreferences.Editor editor = prefs.edit();
+			boolean isSelectClear = appInfo.label
+					.equals(getString(R.string.clear));
+			Memory.setString(this, Preferences.KEY_APP_NAME, isSelectClear ? ""
+					: appInfo.label);
+			Memory.setString(this, Preferences.KEY_PACKAGE_NAME,
+					isSelectClear ? "" : appInfo.packageName);
+			Memory.setString(this, Preferences.KEY_CLASS_NAME,
+					isSelectClear ? "" : appInfo.className);
 
-			editor.putString(Preferences.KEY_PACKAGE_NAME, appInfo.packageName);
-			editor.putString(Preferences.KEY_CLASS_NAME, appInfo.className);
-			if (appInfo.label.equals(getString(R.string.clear))) {
-				editor.putString(Preferences.KEY_APP_NAME, "");
-			} else {
-				editor.putString(Preferences.KEY_APP_NAME, appInfo.label);
-			}
-			editor.commit();
-
-			if (!appInfo.label.equals(getString(R.string.clear))) {
+			if (!isSelectClear) {
 				Toast.makeText(
-						AppLoader.this,
+						this,
 						String.format(getString(R.string.app_loader_select),
 								appInfo.label), Toast.LENGTH_SHORT).show();
 			}
