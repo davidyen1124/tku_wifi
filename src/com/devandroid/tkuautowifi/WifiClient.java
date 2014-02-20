@@ -21,10 +21,6 @@ package com.devandroid.tkuautowifi;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 
 import android.content.Context;
 
@@ -42,52 +38,52 @@ public class WifiClient {
 		return client;
 	}
 
-	static final int CONNECTION_TIMEOUT = 90000;
-	static final int SOCKET_TIMEOUT = 90000;
-	static final int RETRY_COUNT = 4;
+	// static final int CONNECTION_TIMEOUT = 90000;
+	// static final int SOCKET_TIMEOUT = 90000;
+	// static final int RETRY_COUNT = 4;
 
-	private String mUsername;
-	private String mPassword;
-	private DefaultHttpClient mHttpClient;
+	// private String mUsername;
+	// private String mPassword;
+	// private DefaultHttpClient mHttpClient;
 
-	private Context context;
+	// private Context context;
 
-	public WifiClient(String username, String password, Context context) {
-		mUsername = username;
-		mPassword = password;
-		this.context = context;
-
-		HttpParams params = new BasicHttpParams();
-
-		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
-		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
-
-		mHttpClient = new DefaultHttpClient(params);
-		mHttpClient.setParams(params);
-
-		// mHttpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler()
-		// {
-		// @Override
-		// public boolean retryRequest(IOException exception,
-		// int executionCount, HttpContext context) {
-		// if (executionCount >= RETRY_COUNT) {
-		// return false;
-		// }
-		// if (exception instanceof UnknownHostException) {
-		// return false;
-		// }
-		// if (exception instanceof ConnectException) {
-		// return false;
-		// }
-		// if (exception instanceof SSLHandshakeException) {
-		// return false;
-		// }
-		//
-		// return true;
-		// }
-		// });
-
-	}
+	// public WifiClient(String username, String password, Context context) {
+	// mUsername = username;
+	// mPassword = password;
+	// this.context = context;
+	//
+	// HttpParams params = new BasicHttpParams();
+	//
+	// HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
+	// HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
+	//
+	// mHttpClient = new DefaultHttpClient(params);
+	// mHttpClient.setParams(params);
+	//
+	// mHttpClient.setHttpRequestRetryHandler(new HttpRequestRetryHandler()
+	// {
+	// @Override
+	// public boolean retryRequest(IOException exception,
+	// int executionCount, HttpContext context) {
+	// if (executionCount >= RETRY_COUNT) {
+	// return false;
+	// }
+	// if (exception instanceof UnknownHostException) {
+	// return false;
+	// }
+	// if (exception instanceof ConnectException) {
+	// return false;
+	// }
+	// if (exception instanceof SSLHandshakeException) {
+	// return false;
+	// }
+	//
+	// return true;
+	// }
+	// });
+	//
+	// }
 
 	public static void login(final Context context, String username,
 			String password, final LoginCallback callback) {
@@ -103,6 +99,12 @@ public class WifiClient {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+
+		// try {
+		// Thread.sleep(1000);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
 
 		mClient.post(context, url, entity, "application/x-www-form-urlencoded",
 				new AsyncHttpResponseHandler() {
@@ -216,6 +218,7 @@ public class WifiClient {
 	public static void logout(final Context context,
 			final LogoutCallback callback) {
 		final String url = "http://163.13.8.254/cgi-bin/ace_web_auth.cgi?logout";
+
 		mClient.get(url, new AsyncHttpResponseHandler() {
 
 			@Override
