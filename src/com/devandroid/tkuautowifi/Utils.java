@@ -40,8 +40,6 @@ import android.widget.Toast;
 
 public class Utils {
 
-	private static final String TAG = "Utils";
-
 	public static String stackTraceToString(Exception e) {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		PrintStream ps = new PrintStream(os);
@@ -85,7 +83,7 @@ public class Utils {
 
 	public static void setEnableBroadcastReceiver(Context context,
 			boolean enabled) {
-		Log.v(TAG, "Setting BroadcastReceiver status to: " + enabled);
+		Log.v(Constant.TAG, "Setting BroadcastReceiver status to: " + enabled);
 
 		ComponentName receiver = new ComponentName(context,
 				NetworkStateChanged.class);
@@ -204,7 +202,9 @@ public class Utils {
 	}
 
 	public static void createToastNotification(final Context context,
-			Handler handler, final String message, final int toastLength) {
+			final String message, final int toastLength) {
+		Handler handler = new Handler();
+
 		if (message.length() > 0) {
 			handler.post(new Runnable() {
 				@Override

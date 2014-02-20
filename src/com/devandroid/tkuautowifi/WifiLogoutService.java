@@ -1,42 +1,30 @@
 package com.devandroid.tkuautowifi;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.devandroid.tkuautowifi.callback.LogoutCallback;
+import com.devandroid.tkuautowifi.notification.NotificationHelper;
 
 public class WifiLogoutService extends Service {
-	private NotificationManager mNotificationManager;
-	private Handler mHandler;
 
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
 	}
 
-	private void initialValues() {
-		mHandler = new Handler();
-		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-	}
-
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		initialValues();
-
 		if (!Utils.isWifiAvailable(this)) {
 			PendingIntent content_intent = PendingIntent.getActivity(this, 0,
 					new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
-			createNotification(Constant.NOTIFICATION_ONGOING_ID,
-					content_intent,
+
+			NotificationHelper.createNotification(getApplicationContext(),
+					Constant.NOTIFICATION_ONGOING_ID, content_intent,
 					getString(R.string.wifi_disabled_to_logout),
 					getString(R.string.wifi_disabled_to_logout),
 					getString(R.string.tap_to_modify_wifi_settings), false);
@@ -48,8 +36,9 @@ public class WifiLogoutService extends Service {
 		if (!Utils.isConnectToSSID(this, Constant.SSID)) {
 			PendingIntent content_intent = PendingIntent.getActivity(this, 0,
 					new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
-			createNotification(Constant.NOTIFICATION_ONGOING_ID,
-					content_intent, getString(R.string.not_connected_to_tku),
+			NotificationHelper.createNotification(getApplicationContext(),
+					Constant.NOTIFICATION_ONGOING_ID, content_intent,
+					getString(R.string.not_connected_to_tku),
 					getString(R.string.not_connected_to_tku),
 					getString(R.string.tap_to_modify_wifi_settings), false);
 
@@ -59,7 +48,8 @@ public class WifiLogoutService extends Service {
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				new Intent(), 0);
-		createNotification(Constant.NOTIFICATION_ONGOING_ID, contentIntent,
+		NotificationHelper.createNotification(getApplicationContext(),
+				Constant.NOTIFICATION_ONGOING_ID, contentIntent,
 				getString(R.string.logging_out), getString(R.string.app_name),
 				getString(R.string.logging_out), true);
 
@@ -69,9 +59,10 @@ public class WifiLogoutService extends Service {
 			public void onSuccess() {
 				super.onSuccess();
 
-				mNotificationManager.cancel(Constant.NOTIFICATION_ONGOING_ID);
+				NotificationHelper.cancelNotification(getApplicationContext(),
+						Constant.NOTIFICATION_ONGOING_ID);
 				Utils.createToastNotification(getApplicationContext(),
-						mHandler, getString(R.string.logout_successfully),
+						getString(R.string.logout_successfully),
 						Toast.LENGTH_SHORT);
 				stopSelf();
 			}
@@ -80,29 +71,15 @@ public class WifiLogoutService extends Service {
 			public void onFailure(String message) {
 				super.onFailure(message);
 
-				mNotificationManager.cancel(Constant.NOTIFICATION_ONGOING_ID);
+				NotificationHelper.cancelNotification(getApplicationContext(),
+						Constant.NOTIFICATION_ONGOING_ID);
 				Utils.createToastNotification(getApplicationContext(),
-						mHandler, getString(R.string.logout_successfully),
+						getString(R.string.logout_successfully),
 						Toast.LENGTH_SHORT);
 				stopSelf();
 			}
 		});
+
 		return START_STICKY;
-	}
-
-	private void createNotification(int notification_id,
-			PendingIntent contentIntent, String ticker_text,
-			String content_title, String content_text, boolean ongoing) {
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-				this)
-				.setLargeIcon(
-						BitmapFactory.decodeResource(getResources(),
-								R.drawable.ic_launcher))
-				.setSmallIcon(R.drawable.notification_small_icon)
-				.setTicker(ticker_text).setContentTitle(content_title)
-				.setContentText(content_text).setContentIntent(contentIntent)
-				.setOngoing(ongoing);
-
-		mNotificationManager.notify(notification_id, mBuilder.build());
 	}
 }
