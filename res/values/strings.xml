@@ -86,13 +86,4 @@
     <string name="input_feedback">Input feedback</string>
     <string name="login_error">Login error</string>
 
-    <string-array name="tutorial_title">
-        <item>Thanks for downloading TKU Wi-Fi by Sparks Lab</item>
-        <item>Please enter your ID</item>
-        <item>Please enter your password</item>
-        <item>Auto login</item>
-        <item>Auto launch app</item>
-        <item>Put a widget on your home screen!</item>
-    </string-array>
-
 </resources>

@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 import com.devandroid.tkuautowifi.callback.LoginCallback;
 import com.devandroid.tkuautowifi.notification.NotificationHelper;
+import com.devandroid.tkuautowifi.ui.AppLoader;
+import com.devandroid.tkuautowifi.ui.Preferences;
 
 public class WifiLoginService extends Service {
 	private String mUsername, mPassword;

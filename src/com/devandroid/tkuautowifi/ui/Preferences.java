@@ -16,7 +16,7 @@
  * 
  */
 
-package com.devandroid.tkuautowifi;
+package com.devandroid.tkuautowifi.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,6 +37,13 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.devandroid.tkuautowifi.Constant;
+import com.devandroid.tkuautowifi.Memory;
+import com.devandroid.tkuautowifi.R;
+import com.devandroid.tkuautowifi.Utils;
+import com.devandroid.tkuautowifi.WifiLoginService;
+import com.devandroid.tkuautowifi.WifiLogoutService;
 
 public class Preferences extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener, OnPreferenceClickListener {
@@ -79,7 +86,6 @@ public class Preferences extends PreferenceActivity implements
 
 		findViews();
 		setListeners();
-		checkStartTutorial();
 	}
 
 	private void findViews() {
@@ -106,23 +112,6 @@ public class Preferences extends PreferenceActivity implements
 		pref_version.setOnPreferenceClickListener(this);
 		pref_website.setOnPreferenceClickListener(this);
 		pref_author.setOnPreferenceClickListener(this);
-	}
-
-	private void checkStartTutorial() {
-		if (prefs.getBoolean(KEY_FIRST_TIME_OPEN, true)) {
-			prefs.edit().putBoolean(KEY_FIRST_TIME_OPEN, false).commit();
-
-			startActivityForResult(new Intent(this, TutorialActivity.class),
-					100);
-		} else {
-			if (prefs.getString(KEY_USERNAME, "").equals("")
-					&& prefs.getString(KEY_PASSWORD, "").equals("")) {
-				prefs.edit().putBoolean(KEY_FIRST_TIME_OPEN, false).commit();
-
-				startActivityForResult(
-						new Intent(this, TutorialActivity.class), 100);
-			}
-		}
 	}
 
 	@Override

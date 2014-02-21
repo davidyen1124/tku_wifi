@@ -16,11 +16,17 @@
  * 
  */
 
-package com.devandroid.tkuautowifi;
+package com.devandroid.tkuautowifi.ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.devandroid.tkuautowifi.Memory;
+import com.devandroid.tkuautowifi.R;
+import com.devandroid.tkuautowifi.R.id;
+import com.devandroid.tkuautowifi.R.layout;
+import com.devandroid.tkuautowifi.R.string;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
