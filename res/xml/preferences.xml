@@ -37,36 +37,6 @@
             android:key="select_app_launch"
             android:title="@string/menu_select_app_launch_title" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/notification" >
-        <PreferenceScreen
-            android:key="toast_notify"
-            android:title="@string/pref_toast_notify_title" >
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="toast_notify_success"
-                android:title="@string/pref_toast_notify_success" />
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="toast_notify_not_required"
-                android:title="@string/pref_toast_notify_not_required" />
-        </PreferenceScreen>
-        <PreferenceScreen
-            android:key="error_notify"
-            android:title="@string/pref_error_notify_title" >
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="error_notify_sound"
-                android:title="@string/pref_error_notify_sound" />
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="error_notify_vibrate"
-                android:title="@string/pref_error_notify_vibrate" />
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="error_notify_lights"
-                android:title="@string/pref_error_notify_lights" />
-        </PreferenceScreen>
-    </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_about" >
         <Preference
             android:key="version"

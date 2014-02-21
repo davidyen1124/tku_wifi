@@ -100,11 +100,11 @@ public class WifiClient {
 			e.printStackTrace();
 		}
 
-		// try {
-		// Thread.sleep(1000);
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		mClient.post(context, url, entity, "application/x-www-form-urlencoded",
 				new AsyncHttpResponseHandler() {

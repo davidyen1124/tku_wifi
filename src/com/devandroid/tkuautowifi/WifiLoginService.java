@@ -84,13 +84,9 @@ public class WifiLoginService extends Service {
 					public void onSuccess() {
 						super.onSuccess();
 
-						if (Memory.getBoolean(getApplicationContext(),
-								Preferences.KEY_TOAST_NOTIFY_SUCCESS, true)) {
-							Utils.createToastNotification(
-									getApplicationContext(),
-									getString(R.string.login_successful),
-									Toast.LENGTH_SHORT);
-						}
+						Utils.createToastNotification(getApplicationContext(),
+								getString(R.string.login_successful),
+								Toast.LENGTH_SHORT);
 
 						PendingIntent contentIntent = PendingIntent.getService(
 								getApplicationContext(), 0, new Intent(

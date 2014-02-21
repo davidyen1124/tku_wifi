@@ -18,10 +18,6 @@
 
 package com.devandroid.tkuautowifi;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,7 +29,6 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -52,13 +47,6 @@ public class Preferences extends PreferenceActivity implements
 	public static final String KEY_ENABLED = "enabled";
 	public static final String KEY_USERNAME = "username";
 	public static final String KEY_PASSWORD = "password";
-	public static final String KEY_ERROR_NOTIFY = "error_notify";
-	public static final String KEY_ERROR_NOTIFY_SOUND = "error_notify_sound";
-	public static final String KEY_ERROR_NOTIFY_VIBRATE = "error_notify_vibrate";
-	public static final String KEY_ERROR_NOTIFY_LIGHTS = "error_notify_lights";
-	public static final String KEY_TOAST_NOTIFY = "toast_notify";
-	public static final String KEY_TOAST_NOTIFY_SUCCESS = "toast_notify_success";
-	public static final String KEY_TOAST_NOTIFY_NOT_REQUIRED = "toast_notify_not_required";
 	public static final String KEY_VERSION = "version";
 	public static final String KEY_WEBSITE = "website";
 	public static final String KEY_AUTHOR = "author";
@@ -83,7 +71,6 @@ public class Preferences extends PreferenceActivity implements
 	private Preference pref_login, pref_logout, pref_connection_detail,
 			pref_select_app, pref_version, pref_website, pref_author;
 	private EditTextPreference field_username, field_password;
-	private PreferenceScreen pref_success, pref_error;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -109,8 +96,6 @@ public class Preferences extends PreferenceActivity implements
 		pref_author = (Preference) findPreference(KEY_AUTHOR);
 		field_username = (EditTextPreference) findPreference(KEY_USERNAME);
 		field_password = (EditTextPreference) findPreference(KEY_PASSWORD);
-		pref_success = (PreferenceScreen) findPreference(KEY_TOAST_NOTIFY);
-		pref_error = (PreferenceScreen) findPreference(KEY_ERROR_NOTIFY);
 	}
 
 	private void setListeners() {
@@ -149,8 +134,6 @@ public class Preferences extends PreferenceActivity implements
 
 		updateUsernameSummary();
 		updatePasswordSummary();
-		updateErrorNotificationSummary();
-		updateToastNotificationSummary();
 		updateVersionSummary();
 		updateAppLaunchSummary();
 	}
@@ -174,13 +157,6 @@ public class Preferences extends PreferenceActivity implements
 			updateUsernameSummary();
 		} else if (key.equals(KEY_PASSWORD)) {
 			updatePasswordSummary();
-		} else if (key.equals(KEY_ERROR_NOTIFY_SOUND)
-				|| key.equals(KEY_ERROR_NOTIFY_VIBRATE)
-				|| key.equals(KEY_ERROR_NOTIFY_LIGHTS)) {
-			updateErrorNotificationSummary();
-		} else if (key.equals(KEY_TOAST_NOTIFY_SUCCESS)
-				|| key.equals(KEY_TOAST_NOTIFY_NOT_REQUIRED)) {
-			updateToastNotificationSummary();
 		}
 	}
 
@@ -254,69 +230,13 @@ public class Preferences extends PreferenceActivity implements
 		}
 	}
 
-	private void updateErrorNotificationSummary() {
-		ArrayList<String> methods = new ArrayList<String>();
-
-		if (prefs.getBoolean(Preferences.KEY_ERROR_NOTIFY_SOUND, false)) {
-			methods.add(getString(R.string.pref_error_notify_sound));
-		}
-		if (prefs.getBoolean(Preferences.KEY_ERROR_NOTIFY_VIBRATE, false)) {
-			methods.add(getString(R.string.pref_error_notify_vibrate));
-		}
-		if (prefs.getBoolean(Preferences.KEY_ERROR_NOTIFY_LIGHTS, false)) {
-			methods.add(getString(R.string.pref_error_notify_lights));
-		}
-
-		if (methods.size() == 0) {
-			pref_error.setSummary(R.string.pref_error_notify_none);
-		} else {
-			String summaryStr = join(methods,
-					getString(R.string.pref_error_notify_deliminator));
-			pref_error.setSummary(summaryStr);
-		}
-	}
-
-	private void updateToastNotificationSummary() {
-		ArrayList<String> methods = new ArrayList<String>();
-
-		if (prefs.getBoolean(KEY_TOAST_NOTIFY_SUCCESS, true)) {
-			methods.add(getString(R.string.pref_toast_notify_success));
-		}
-		if (prefs.getBoolean(KEY_TOAST_NOTIFY_NOT_REQUIRED, true)) {
-			methods.add(getString(R.string.pref_toast_notify_not_required));
-		}
-
-		if (methods.size() == 0) {
-			pref_success.setSummary(R.string.pref_error_notify_none);
-		} else {
-			String summaryStr = join(methods,
-					getString(R.string.pref_error_notify_deliminator));
-			pref_success.setSummary(summaryStr);
-		}
-	}
-
 	private void updateVersionSummary() {
 		String versionSummary = String.format(getString(R.string.version),
 				Utils.getVersionName(this));
 		pref_version.setSummary(versionSummary);
 	}
 
-	private static String join(Collection<String> col, String deliminator) {
-		StringBuilder sb = new StringBuilder();
-		Iterator<String> iter = col.iterator();
-
-		sb.append(iter.next());
-		while (iter.hasNext()) {
-			sb.append(deliminator);
-			sb.append(iter.next());
-		}
-		return sb.toString();
-	}
-
 	private void login() {
-		// Intent i = new Intent(Preferences.this, WifiLogin.class);
-		// startService(i);
-
 		Intent intent = new Intent(this, WifiLoginService.class);
 		startService(intent);
 	}
