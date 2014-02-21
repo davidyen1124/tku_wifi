@@ -22,12 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.devandroid.tkuautowifi.Memory;
-import com.devandroid.tkuautowifi.R;
-import com.devandroid.tkuautowifi.R.id;
-import com.devandroid.tkuautowifi.R.layout;
-import com.devandroid.tkuautowifi.R.string;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -47,6 +41,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.devandroid.tkuautowifi.Memory;
+import com.devandroid.tkuautowifi.R;
+
 public class AppLoader extends Activity implements OnItemClickListener {
 	private ListView listview;
 	private MyAdapter adapter;
@@ -58,6 +55,7 @@ public class AppLoader extends Activity implements OnItemClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle(R.string.app_loader);
 
 		initialValues();
 		findViews();

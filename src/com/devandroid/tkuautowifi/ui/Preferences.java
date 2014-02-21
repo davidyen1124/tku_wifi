@@ -57,8 +57,6 @@ public class Preferences extends PreferenceActivity implements
 	public static final String KEY_VERSION = "version";
 	public static final String KEY_WEBSITE = "website";
 	public static final String KEY_AUTHOR = "author";
-	public static final String KEY_FIRST_TIME_OPEN = "first_time_open";
-	public static final String KEY_START_TUTORIAL = "start_tutorial";
 	public static final String KEY_CONNECTION_DETAIL = "connection_detail";
 
 	public static final String BUNDLE_SHOW_CLEAR_ITEM = "show_clear_item";
@@ -82,6 +80,7 @@ public class Preferences extends PreferenceActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle(getString(R.string.app_name));
 		addPreferencesFromResource(R.xml.preferences);
 
 		findViews();
@@ -90,8 +89,6 @@ public class Preferences extends PreferenceActivity implements
 
 	private void findViews() {
 		prefs = getPreferenceManager().getSharedPreferences();
-
-		setTitle(getString(R.string.app_name));
 
 		pref_login = (Preference) findPreference(KEY_LOGIN_NOW);
 		pref_logout = (Preference) findPreference(KEY_LOGOUT_NOW);
@@ -158,7 +155,7 @@ public class Preferences extends PreferenceActivity implements
 				.length() > 0;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(getString(R.string.menu_select_app_launch_title));
+		builder.setTitle(getString(R.string.app_loader));
 		builder.setMessage(hadChoosedApp ? String.format(
 				getString(R.string.app_loader_select),
 				prefs.getString(KEY_APP_NAME, ""))
@@ -223,27 +220,6 @@ public class Preferences extends PreferenceActivity implements
 		String versionSummary = String.format(getString(R.string.version),
 				Utils.getVersionName(this));
 		pref_version.setSummary(versionSummary);
-	}
-
-	private void login() {
-		Intent intent = new Intent(this, WifiLoginService.class);
-		startService(intent);
-	}
-
-	private void logout() {
-		Intent i = new Intent(Preferences.this, WifiLogoutService.class);
-		startService(i);
-	}
-
-	private void openMoreApps() {
-		Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE_URL));
-		startActivity(i);
-	}
-
-	private void openAppLink() {
-		Intent i = new Intent(Intent.ACTION_VIEW,
-				Uri.parse(Constant.MARKET_PREFIX + getPackageName()));
-		startActivity(i);
 	}
 
 	private void sendFeedback() {
@@ -319,30 +295,26 @@ public class Preferences extends PreferenceActivity implements
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == pref_login) {
-			login();
+			Intent intent = new Intent(this, WifiLoginService.class);
+			startService(intent);
 		} else if (preference == pref_logout) {
-			logout();
+			Intent i = new Intent(Preferences.this, WifiLogoutService.class);
+			startService(i);
 		} else if (preference == pref_connection_detail) {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(URL_DETAIL)));
 		} else if (preference == pref_select_app) {
 			openSelectAppDialog();
 		} else if (preference == pref_website) {
-			openMoreApps();
+			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE_URL));
+			startActivity(i);
 		} else if (preference == pref_version) {
-			openAppLink();
+			Intent i = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(Constant.MARKET_PREFIX + getPackageName()));
+			startActivity(i);
 		} else if (preference == pref_author) {
 			sendFeedback();
 		}
 
 		return false;
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == 100) {
-			startActivity(new Intent(this, Preferences.class));
-			finish();
-		}
 	}
 }

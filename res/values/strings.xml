@@ -85,5 +85,6 @@
     <string name="send">Send</string>
     <string name="input_feedback">Input feedback</string>
     <string name="login_error">Login error</string>
+    <string name="app_loader">App loader</string>
 
 </resources>
