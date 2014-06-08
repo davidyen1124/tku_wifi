@@ -56,7 +56,6 @@ public class Preferences extends PreferenceActivity implements
 	public static final String KEY_PASSWORD = "password";
 	public static final String KEY_VERSION = "version";
 	public static final String KEY_WEBSITE = "website";
-	public static final String KEY_AUTHOR = "author";
 	public static final String KEY_CONNECTION_DETAIL = "connection_detail";
 
 	public static final String BUNDLE_SHOW_CLEAR_ITEM = "show_clear_item";
@@ -74,7 +73,7 @@ public class Preferences extends PreferenceActivity implements
 	private SharedPreferences prefs;
 
 	private Preference pref_login, pref_logout, pref_connection_detail,
-			pref_select_app, pref_version, pref_website, pref_author;
+			pref_select_app, pref_version, pref_website;
 	private EditTextPreference field_username, field_password;
 
 	@Override
@@ -96,7 +95,6 @@ public class Preferences extends PreferenceActivity implements
 		pref_select_app = (Preference) findPreference(KEY_SELECT_APP);
 		pref_version = (Preference) findPreference(KEY_VERSION);
 		pref_website = (Preference) findPreference(KEY_WEBSITE);
-		pref_author = (Preference) findPreference(KEY_AUTHOR);
 		field_username = (EditTextPreference) findPreference(KEY_USERNAME);
 		field_password = (EditTextPreference) findPreference(KEY_PASSWORD);
 	}
@@ -108,7 +106,6 @@ public class Preferences extends PreferenceActivity implements
 		pref_select_app.setOnPreferenceClickListener(this);
 		pref_version.setOnPreferenceClickListener(this);
 		pref_website.setOnPreferenceClickListener(this);
-		pref_author.setOnPreferenceClickListener(this);
 	}
 
 	@Override
@@ -311,8 +308,6 @@ public class Preferences extends PreferenceActivity implements
 			Intent i = new Intent(Intent.ACTION_VIEW,
 					Uri.parse(Constant.MARKET_PREFIX + getPackageName()));
 			startActivity(i);
-		} else if (preference == pref_author) {
-			sendFeedback();
 		}
 
 		return false;

@@ -46,10 +46,6 @@
             android:key="website"
             android:summary="@string/more_app_created_by_sparkslab"
             android:title="@string/more_apps" />
-        <Preference
-            android:key="author"
-            android:summary="@string/sparkslab"
-            android:title="@string/send_feedback" />
     </PreferenceCategory>
 
 </PreferenceScreen>
